@@ -1,47 +1,82 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contacto | Mi Portafolio</title>
-  <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="assets/style.css" />
-  <link rel="icon" href="assets/favicon.ico" sizes="any" />
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <script src="assets/script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto | Mi Portafolio</title>
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <div class="logo">🚀 MiPortafolio</div>
-      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
-      <ul class="menu">
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="sobre.html">Sobre mí</a></li>
-        <li><a href="portafolio.html">Portafolio</a></li>
-        <li><a href="servicios.html">Servicios</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
+  <header>
+    <nav class="navbar">
+      <div class="logo">🚀 MiPortafolio</div>
+      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+      <ul class="menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="sobre.html">Sobre mí</a></li>
+        <li><a href="portafolio.html">Portafolio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contacto.html" class="active">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <main>
-    <h1>Contacto</h1>
-        <form class="form-contacto" action="https://formspree.io/f/mblzrypb" method="POST">
-      <input type="text" name="nombre" placeholder="Tu nombre" required />
-      <input type="email" name="email" placeholder="Tu correo electrónico" required />
-      <textarea name="mensaje" rows="5" placeholder="Escribe tu mensaje" required></textarea>
-      <button type="submit" class="btn">Enviar</button>
-    </form>
-  </main>
+  <main>
+    <h1>Contacto</h1>
 
-  <footer>
-    <p>&copy; 2025 Mi Portafolio. Todos los derechos reservados.</p>
-  </footer>
+    <form id="form-contacto" class="form-contacto" action="https://formspree.io/f/mblzrypb" method="POST">
+      <input type="text" name="nombre" placeholder="Tu nombre" required />
+      <input type="email" name="email" placeholder="Tu correo electrónico" required />
+      <textarea name="message" rows="5" placeholder="Escribe tu mensaje" required></textarea>
+      <!-- Asunto oculto para organizar los correos -->
+      <input type="hidden" name="_subject" value="Nuevo mensaje desde Mi Portafolio" />
+      <button type="submit" class="btn">Enviar</button>
+    </form>
 
-  <button id="btn-instalar" class="btn-flotante" style="display:none;">📲 Instalar App</button>
+    <!-- Mensaje de estado -->
+    <p id="form-status" class="form-status"></p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Mi Portafolio. Todos los derechos reservados.</p>
+  </footer>
+
+  <button id="btn-instalar" class="btn-flotante" style="display:none;">📲 Instalar App</button>
+
+  <script>
+    // Script para manejar el envío con fetch
+    const form = document.getElementById("form-contacto");
+    const status = document.getElementById("form-status");
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault(); // evitar recargar la página
+      const data = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: data,
+          headers: { "Accept": "application/json" }
+        });
+
+        if (response.ok) {
+          status.textContent = "✅ ¡Gracias! Tu mensaje ha sido enviado.";
+          status.style.color = "green";
+          form.reset();
+        } else {
+          status.textContent = "❌ Hubo un error al enviar tu mensaje. Inténtalo nuevamente.";
+          status.style.color = "red";
+        }
+      } catch (error) {
+        status.textContent = "⚠️ Error de conexión. Por favor, revisa tu internet.";
+        status.style.color = "red";
+      }
+    });
+  </script>
 </body>
 </html>
-
