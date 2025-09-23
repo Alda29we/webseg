@@ -54,7 +54,7 @@
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
     (function(){
-      emailjs.init("9weVavNJEnGQ98M4H"); // tu Public Key
+      emailjs.init("9weVavNJEnGQ98M4H"); // Public Key actual
     })();
 
     const form = document.getElementById("contact-form");
@@ -69,7 +69,7 @@
       submitBtn.disabled = true;
       submitBtn.textContent = "Enviando...";
 
-      emailjs.sendForm("service_3qbefig", "template_8p7sfyc", this)
+      emailjs.sendForm("service_b2xa6oq", "template_8p7sfyc", this) // IDs actualizados
         .then(() => {
           spinner.style.display = "none";
           status.textContent = "✅ ¡Mensaje enviado con éxito!";
@@ -96,6 +96,8 @@
   </style>
 </body>
 </html>
+
+
 
 
 
