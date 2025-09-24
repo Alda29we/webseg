@@ -1,22 +1,4 @@
-<form id="contact-form" action="https://formspree.io/f/mdkwnzyq" method="POST">
-  <input type="text" name="name" placeholder="Tu nombre" required />
-  <input type="email" name="email" placeholder="Tu correo electrónico" required />
-  <textarea name="message" rows="5" placeholder="Escribe tu mensaje" required></textarea>
-  <button type="submit" class="btn" id="btn-submit">Enviar</button>
-</form>
-
-<!-- Spinner -->
-<div id="spinner" style="display:none; margin:15px 0; text-align:center;">
-  <div style="border:4px solid #f3f3f3; border-top:4px solid #3498db; border-radius:50%; width:30px; height:30px; animation: spin 1s linear infinite; margin:0 auto;"></div>
-</div>
-
-<!-- Estado -->
-<p id="form-status"></p>
-
-<!-- Script para feedback visual -->
-<script>
-  const form = document.getElementById("contact-form");
-  const status = document.getElementById("form-status");
+ById("form-status");
   const spinner = document.getElementById("spinner");
   const submitBtn = document.getElementById("btn-submit");
 
@@ -68,3 +50,4 @@
     100% { transform: rotate(360deg); }
   }
 </style>
+
