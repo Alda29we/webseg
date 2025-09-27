@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inicio | Mi Portafolio</title>
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <script src="assets/script.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">🚀 MiPortafolio</div>
+      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+      <ul class="menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="sobre.html">Sobre mí</a></li>
+        <li><a href="portafolio.html">Portafolio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Contacto</h1>
+
+    <form action="https://formspree.io/f/xqaykgza" method="POST" class="form-contacto">
+      <input type="text" name="name" placeholder="Tu nombre" required />
+      <input type="email" name="email" placeholder="Tu correo electrónico" required />
+      <textarea name="message" rows="5" placeholder="Escribe tu mensaje" required></textarea>
+
+      <!-- Configuración avanzada -->
+      <input type="hidden" name="_subject" value="Nuevo mensaje desde MiPortafolio">
+      <input type="hidden" name="_next" value="https://webseg-kappa.vercel.app/gracias.html">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_autoresponse" value="Gracias por tu mensaje. Te responderé pronto.">
+
+      <button type="submit" class="btn">Enviar</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Mi Portafolio. Todos los derechos reservados.</p>
+  </footer>
+
+  <button id="btn-instalar" class="btn-flotante" style="display:none;">📲 Instalar App</button>
+</body>
+</html>
