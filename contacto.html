@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto | Mi Portafolio</title>
+
+  <!-- Manifest y estilos -->
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="assets/style.css" />
+
+  <!-- Iconos -->
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
+  <!-- JS -->
+  <script src="assets/script.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">🚀 MiPortafolio</div>
+      <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+      <ul class="menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="sobre.html">Sobre mí</a></li>
+        <li><a href="portafolio.html">Portafolio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contacto.html" class="active">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="contacto-section">
+      <h1>Contacto</h1>
+
+      <form id="contact-form" action="https://formspree.io/f/xqaykgza" method="POST" class="form-contacto">
+        <input type="text" name="name" placeholder="Tu nombre" required />
+        <input type="email" name="email" placeholder="Tu correo electrónico" required />
+        <textarea name="message" rows="5" placeholder="Escribe tu mensaje" required></textarea>
+
+        <!-- Configuración avanzada -->
+        <input type="hidden" name="_subject" value="Nuevo mensaje desde MiPortafolio">
+        <!-- Cambio: ruta relativa para evitar 404 -->
+        <input type="hidden" name="_next" value="gracias.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+
+        <button type="submit" class="btn">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Mi Portafolio. Todos los derechos reservados.</p>
+  </footer>
+
+  <button id="btn-instalar" class="btn-flotante" style="display:none;">📲 Instalar App</button>
+
+  <!-- Script para el envío con fetch -->
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const form = e.target;
+      if (!form.reportValidity()) return;
+
+      const fd = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: form.method,
+          body: fd,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          const next = form.querySelector('input[name="_next"]').value;
+          console.log('Envio OK — redirigiendo a', next);
+          window.location.href = next;
+        } else {
+          const data = await res.json().catch(()=>null);
+          console.error('Error en la respuesta', res.status, data);
+          alert('Error al enviar el formulario. Revisa la consola.');
+        }
+      } catch (err) {
+        console.error('Error de red o CORS', err);
+        alert('Error de red. Revisa la consola (F12).');
+      }
+    });
+  </script>
+</body>
+</html>
